@@ -1,24 +1,24 @@
-import java.util.*;
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         ArrayList<Integer> list = new ArrayList<>();
-        HashMap<Integer,Integer> map = new HashMap<>();
-            for(int n1:nums1){
-                if(map.containsKey(n1))
-                    map.put(n1,map.get(n1)+1);
-                else
-                    map.put(n1,1);
-            }
-        for(int n2:nums2){
-            if(map.containsKey(n2) && map.get(n2) > 0){
-                list.add(n2);
-                map.put(n2,map.get(n2)-1);
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i=0,j=0;
+        while(i<nums1.length && j<nums2.length){
+            if(nums1[i] < nums2[j])
+                i++;
+            else if(nums1[i]>nums2[j])
+                j++;
+            else{
+                list.add(nums1[i]);
+                    i++;
+                    j++;
             }
         }
         int ans[] = new int[list.size()];
-        int i=0;
+        int index = 0;
         for(int ele:list){
-            ans[i++]=ele;
+            ans[index++] = ele;
         }
         return ans;
     }
